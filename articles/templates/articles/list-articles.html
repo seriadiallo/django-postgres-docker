@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+</head>
+<body>
+
+    <h1>Liste des articles</h1>
+    <a href="{% url "form-articles" %}">Ajouter</a>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Resume</th>
+        </tr>
+        {% for article  in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.sumary }}</td>
+            </tr>
+        {% endfor %}
+        
+    </table>
+    
+</body>
+</html>
