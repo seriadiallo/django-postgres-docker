@@ -1,28 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'articles/bootstrap.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Article-Formulaire</title>
 </head>
-<body>
+<body class='container'>
     <h1>Formulaire de creation des articles</h1>
     <a href="{% url 'list-articles' %}">Retour</a>
     <form action="" method="post">
         {% csrf_token %}
-        <label for="title">Titre: </label>
-        <input type="text" name="title" id="title"> <br>
-        <label for="sumary">Resume: </label>
-        <input type="text" name="sumary" id="sumary"> <br>
-        <label for="date-pub">Date de publication: </label>
-        <input type="date" name="date_pub" id="date-pub"> <br>
-
-        <textarea name="content" id="content" cols="30" rows="10" >
+        <div class="row">
+            <div class="col">
+                <label for="title">Titre: </label>
+                <input type="text" name="title" id="title" class="form-control"> <br>
+                <label for="sumary">Resume: </label>
+                <input type="text" name="sumary" id="sumary" class="form-control"> <br>
+                <label for="date-pub">Date de publication: </label>
+                <input type="date" name="date_pub" id="date-pub" class="form-control"> <br>
+        
+            </div>
+            <div class="col">
+                <textarea name="content" id="content" cols="30" rows="10" >
           
-        </textarea>
-        <br>
-        <input type="submit" value="Enregistrer">
-        <input type="reset" value="Annuler">
+                </textarea>
+            </div>
+        </div>
+        
+        
+        <br> 
+        {% comment %} <table>
+        {{form}}
+        </table> {% endcomment %}
+        <input type="submit" value="Enregistrer" class="btn btn-primary">
+        <input type="reset" value="Annuler" class="btn btn-danger">
 
     </form>
 </body>

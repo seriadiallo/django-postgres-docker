@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from .forms import ArticleForm
 from .models import Article
@@ -16,13 +17,19 @@ def formulaire(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            cleaned_data = form.cleaned_data
-            article = Article(**cleaned_data)
+            # cleaned_data = form.cleaned_data
+            # article = Article(**cleaned_data)
             # article.title = cleaned_data['title']
             # article.sumary = cleaned_data['sumary']
             # article.date_pub = cleaned_data['date_pub']
             # article.content = cleaned_data['content']
-            article.save()
+            form.save()
+            return redirect(reverse('list-articles'))
         else:
             print(form.errors)
-    return render(request, 'articles/formulaire.html')
+    else:
+        form = ArticleForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'articles/formulaire.html', context)
