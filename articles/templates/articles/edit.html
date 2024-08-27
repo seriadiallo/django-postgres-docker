@@ -1,0 +1,25 @@
+{% extends "articles/layout.html" %}
+    
+    {% block content %}
+    <h1>Formulaire de modification des articles</h1>
+    <a href="{% url 'list-articles' %}">Retour</a>
+    <form action="{% url 'edit' article.id %}" method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            {{ field.label_tag }} {{ field }}
+        {% endfor %}
+        <div class="row">
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+            <div class="col-md-1">
+                <button type="reset" class="btn btn-danger">Annuler</button>
+            </div>
+        </div>
+       
+
+    </form>
+    
+    {% endblock content %}
+    

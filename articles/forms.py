@@ -13,6 +13,7 @@ class ArticleForm(forms.ModelForm):
 
     # tag = forms.CharField(max_length=240, min_length=2, required=True,
     #                       widget=forms.TextInput(attrs={'class': 'form-control'}))
+    
 
     class Meta:
         model = Article

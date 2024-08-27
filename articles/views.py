@@ -17,13 +17,7 @@ def formulaire(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            # cleaned_data = form.cleaned_data
-            # article = Article(**cleaned_data)
-            # article.title = cleaned_data['title']
-            # article.sumary = cleaned_data['sumary']
-            # article.date_pub = cleaned_data['date_pub']
-            # article.content = cleaned_data['content']
-            form.save()
+            form.save()  # enregistrement dans la base
             return redirect(reverse('list-articles'))
         else:
             print(form.errors)
@@ -33,3 +27,18 @@ def formulaire(request):
         'form': form
     }
     return render(request, 'articles/formulaire.html', context)
+
+
+def get_and_update(request, id):
+    article = Article.objects.get(id=id)  # recuperation d'un article
+    if request.method == 'GET':
+        form = ArticleForm(instance=article)  # creation d'un formulaire
+    elif request.method == 'POST':
+        form = ArticleForm(instance=article, data=request.POST)  # creation d'un formulaire
+        if form.is_valid():
+            form.save()
+    context = {
+        'article': article,
+        'form': form
+    }
+    return render(request, 'articles/edit.html', context)
