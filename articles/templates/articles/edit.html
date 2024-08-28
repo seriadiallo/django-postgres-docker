@@ -3,11 +3,20 @@
     {% block content %}
     <h1>Formulaire de modification des articles</h1>
     <a href="{% url 'list-articles' %}">Retour</a>
-    <form action="{% url 'edit' article.id %}" method="post">
+    <form action="{% url 'edit' article.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
         {% for field in form %}
-            {{ field.label_tag }} {{ field }}
+        {{ field.label_tag }}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li><strong style="color: red;">{{ error|escape }}</strong></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+             {{ field }}
         {% endfor %}
         <div class="row">
             <div class="col-md-1">

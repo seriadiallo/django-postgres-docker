@@ -15,7 +15,7 @@ def list_article(request):
 
 def formulaire(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, files=request.FILES)
         if form.is_valid():
             form.save()  # enregistrement dans la base
             return redirect(reverse('list-articles'))
@@ -34,9 +34,10 @@ def get_and_update(request, id):
     if request.method == 'GET':
         form = ArticleForm(instance=article)  # creation d'un formulaire
     elif request.method == 'POST':
-        form = ArticleForm(instance=article, data=request.POST)  # creation d'un formulaire
+        form = ArticleForm(instance=article, data=request.POST, files=request.FILES)  # creation d'un formulaire
         if form.is_valid():
             form.save()
+            return redirect(reverse('list-articles'))
     context = {
         'article': article,
         'form': form

@@ -17,7 +17,7 @@ class ArticleForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ('title', 'sumary', 'date_pub', 'content')
+        fields = ('title', 'sumary', 'cover', 'date_pub', 'content')
         widgets = {
             "content": forms.Textarea(attrs={"cols": 80, "rows": 20}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),

@@ -9,6 +9,7 @@ class Article(models.Model):
     sumary = models.CharField(max_length=255, null=True, blank=True, verbose_name='resume')
     content = models.TextField(verbose_name='contenu')
     date_pub = models.DateField(null=True, verbose_name='date de publication')
+    cover = models.ImageField(upload_to='articles', max_length=255, null=True, verbose_name="photo de couverture")
 
     def __str__(self):
         return self.title

@@ -6,12 +6,17 @@
         <tr>
             <th>Id</th>
             <th>Titre</th>
+            <th>Couverture</th>
             <th>Resume</th>
         </tr>
         {% for article  in articles %}
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
+                <td> {% if article.cover %}
+                        <img src="{{ article.cover.url }}" alt="">
+                    {% endif %}
+                </td>
                 <td>{{ article.sumary }}</td>
             </tr>
         {% endfor %}
