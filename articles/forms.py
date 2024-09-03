@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Article
+from .models import Article, Comment
 
 
 # class ArticleForm(forms.Form):
@@ -24,3 +24,10 @@ class ArticleForm(forms.ModelForm):
             'sumary': forms.TextInput(attrs={'class': 'form-control'}),
             'date_pub': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('content', )

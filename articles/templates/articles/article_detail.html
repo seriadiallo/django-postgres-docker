@@ -1,0 +1,47 @@
+{% extends "articles/layout.html" %}
+{% block content %}
+    <h1>{{ article.title }}</h1>
+    <div class="row">
+        <div class="col-10 offset-1">
+            <img style="width: 80%; height: 200px;" src="{% if article.cover %} {{ article.cover.url }} {% endif %}" class="card-img-top" alt="{{ article.title }}">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-10 offset-1">
+            {{ article.content }}
+        </div>
+    </div>
+    <hr>
+    {% for comment in article.comment_set.all %}
+    <div class="row">
+        <div class="col-3">
+            <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ comment.created_at }}</h5>
+                  <p class="card-text">{{ comment.content }}</p>
+                </div>
+              </div>              
+        </div>
+    </div>
+    
+    {% endfor %}
+    <form action="{% url 'add-comment' article.id %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-10 offset-1">
+                <table>
+                    {{ form }}
+                </table>
+            </div>
+            <p>
+                <button class="btn btn-primary">Enregistrer</button>
+            </p>
+        </div>
+
+    </form>
+    
+   
+
+{% endblock content %}
