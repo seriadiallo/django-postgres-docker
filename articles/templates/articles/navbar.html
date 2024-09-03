@@ -10,10 +10,21 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url "list-articles" %}">Liste</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "form-articles" %}">Form</a>
-          </li>
-
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "form-articles" %}">Form</a>
+            </li>
+          {% endif %}
+          
+          {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "accounts:login" %}">Connexion</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "accounts:logout" %}">Deconnexion</a>
+            </li>
+          {% endif %}
         </ul>
       </div>
     </div>
