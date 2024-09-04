@@ -3,6 +3,8 @@ from django.urls import path
 from .views import list_article, formulaire, get_and_update, add_comment
 from .view_class import ArticleListView, ArticleCreateView, ArticleDetailView
 
+# app_name = 'articles'
+
 urlpatterns = [
     path('', ArticleListView.as_view(), name='list-articles'),
     path('class/', ArticleListView.as_view(), name='list-articles-class'),

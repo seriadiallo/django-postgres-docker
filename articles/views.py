@@ -13,15 +13,16 @@ def list_article(request):
     }
     return render(request, 'articles/list-articles.html', context)
 
-@login_required
+
+@login_required  # decorateur
 def formulaire(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST, files=request.FILES)
         if form.is_valid():
-            form.save()  # enregistrement dans la base
+            article = form.save(commit=False)
+            article.user = request.user
+            article.save()  # enregistrement dans la base
             return redirect(reverse('list-articles'))
-        else:
-            print(form.errors)
     else:
         form = ArticleForm()
     context = {
@@ -29,7 +30,7 @@ def formulaire(request):
     }
     return render(request, 'articles/formulaire.html', context)
 
-
+@login_required
 def get_and_update(request, id):
     article = Article.objects.get(id=id)  # recuperation d'un article
     if request.method == 'GET':
@@ -55,6 +56,7 @@ def add_comment(request, id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.article = article
+            comment.owner = request.user
             comment.save()
         else:
             context = {

@@ -12,7 +12,8 @@ class ArticleListView(ListView):
     model = Article
     context_object_name = 'articles'
     # template_name = 'articles/list-articles.html'
-    queryset = Article.objects.filter(date_pub__lte=timezone.now())
+    # queryset = Article.objects.filter(date_pub__lte=timezone.now())
+    queryset = Article.objects.all()
 
 
 class ArticleCreateView(CreateView):
