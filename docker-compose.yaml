@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: unless-stopped
+    container_name: blog-db
+    environment:
+      - POSTGRES_DB=dbblog
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '54320:5432'
+    volumes: 
+      - techleader_db:/var/lib/postgresql/data
+volumes:
+  techleader_db:
+
+
+
