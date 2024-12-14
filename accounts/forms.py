@@ -12,11 +12,11 @@ class UserForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
-            'password': forms.TextInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
 
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(required=True, max_length=50, min_length=3)
-    password = forms.CharField(required=True, max_length=50, min_length=3, widget=forms.PasswordInput)
+    username = forms.CharField(required=True, max_length=50, min_length=3, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(required=True, max_length=50, min_length=3, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
