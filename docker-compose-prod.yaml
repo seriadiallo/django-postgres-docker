@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     image: blog-django-image
     volumes:
-      - static_volume:/app/static
-      - media_volume:/app/mediafiles
+      - ./staticfiles:/app/static
+      - ./mediafiles:/app/mediafiles
     env_file:
       - ./settings.ini
     ports:
@@ -27,16 +27,14 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - static_volume:/app/staticfiles
-      - media_volume:/app/mediafiles
+      - ./staticfiles:/app/staticfiles
+      - ./mediafiles:/app/mediafiles
     ports:
       - 8003:80
     depends_on:
       - app
 volumes:
   db_data:
-  static_volume:
-  media_volume:
   
 
 
