@@ -6,7 +6,7 @@ services:
     image: blog-django-image
     volumes:
       - ./static:/app/static
-      - ./mediafiles:/app/mediafiles
+      - ./mediafiles:/app/media
     env_file:
       - ./settings.ini
     ports:
@@ -28,9 +28,9 @@ services:
     build: ./nginx
     volumes:
       - ./static:/app/staticfiles
-      - ./mediafiles:/app/mediafiles
+      - ./media:/app/mediafiles
     ports:
-      - 8003:80
+      - 80:80
     depends_on:
       - app
 volumes:
