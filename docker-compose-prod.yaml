@@ -1,0 +1,45 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: blog-django-image
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/mediafiles
+    env_file:
+      - ./settings.ini
+    ports:
+      - 8000:8000
+    command: >
+      bash -c " 
+         gunicorn --bind 0.0.0.0:8000 --worker-tmp-dir /dev/shm blog.wsgi:application"
+  db:
+    image: postgres:14.1-alpine
+    restart: unless-stopped
+    container_name: blog-db
+    environment:
+      - POSTGRES_DB=dbblog
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes: 
+      - db_data:/var/lib/postgresql/data
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    ports:
+      - 8003:80
+    depends_on:
+      - app
+volumes:
+  db_data:
+  static_volume:
+  media_volume:
+  
+
+
+
+
+
