@@ -42,14 +42,9 @@ COPY ./requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Create a non-root user
-# RUN useradd \
-#     --no-create-home \
-#     django-user
 
 
-RUN adduser -u 5678  --no-create-home --disabled-password --gecos "" django-user && chown -R django-user /app/
-# Copy application files
-COPY --chown=django-user:django-user ./ /app/
+
+COPY ./ /app/
 
 # Switch to non-root user
-USER django-user
